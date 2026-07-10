@@ -14,6 +14,11 @@ upgrade. We keep new code in **new files** wherever possible and list every
 | `apps/api/plane/app/serializers/worklog.py` | 1 | `IssueWorklogSerializer` |
 | `apps/api/plane/app/views/issue/worklog.py` | 1 | `IssueWorklogViewSet` |
 | `apps/api/plane/db/migrations/0122_issueworklog.py` | 1 | Worklog table migration |
+| `packages/types/src/issues/worklog.ts` | 1 | `TWorklog` frontend types |
+| `apps/web/core/services/issue/worklog.service.ts` | 1 | `WorklogService` (REST calls) |
+| `apps/web/core/store/issue/issue-details/worklog.store.ts` | 1 | `IssueWorklogStore` (MobX) |
+| `apps/web/ce/components/issues/worklog/create-update-worklog-modal.tsx` | 1 | Log/edit time modal |
+| `apps/web/ce/components/issues/worklog/helper.ts` | 1 | Duration formatter |
 
 ## Core files edited (merge-risk — keep minimal)
 
@@ -23,12 +28,13 @@ upgrade. We keep new code in **new files** wherever possible and list every
 | `apps/api/plane/app/serializers/__init__.py` | 1 | +1 import: `IssueWorklogSerializer` |
 | `apps/api/plane/app/views/__init__.py` | 1 | +1 import: `IssueWorklogViewSet` |
 | `apps/api/plane/app/urls/issue.py` | 1 | +1 import + 2 `path()` entries (`.../worklogs/`, `.../worklogs/<pk>/`) |
+| `packages/types/src/issues/base.ts` | 1 | +1 barrel export: `export * from "./worklog"` |
+| `apps/web/core/services/issue/index.ts` | 1 | +1 barrel export: `worklog.service` |
+| `apps/web/ce/components/issues/worklog/property/root.tsx` | 1 | Replaced empty CE stub with real sidebar panel (list/total/add/edit/delete). Same export name `IssueWorklogProperty`. |
+| `apps/web/core/store/issue/issue-details/root.store.ts` | 1 | Register `worklog` store; add `isWorklogModalOpen` + `toggleWorklogModal` and include in `isAnyModalOpen` (so peek panel doesn't close under the modal) |
 
 ## Pending (frontend, later phases)
 
-Worklog UI will replace CE stubs (in-place edits, since there is no `ee/` tree):
-- `apps/web/ce/components/issues/worklog/property/root.tsx` (sidebar UI)
-- possibly `apps/web/ce/components/issues/worklog/activity/*` (activity-feed)
-- new service methods in `apps/web/core/services/issue/`
-- new MobX store `apps/web/core/store/issue/issue-details/worklog.store.ts`
-- store wiring in the issue-detail root store (core edit — to be logged here)
+Not yet touched (worklog UI is sidebar-only for now):
+- `apps/web/ce/components/issues/worklog/activity/*` (activity-feed integration — needs backend to emit worklog activity records)
+- Objective 2 (per-person stats + export) and Objective 4 (dashboards)
