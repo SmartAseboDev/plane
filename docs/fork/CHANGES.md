@@ -25,6 +25,8 @@ upgrade. We keep new code in **new files** wherever possible and list every
 | `apps/admin/app/(all)/(dashboard)/authentication/microsoft/form.tsx` | 5 | God-mode credentials form (client id/secret/tenant) |
 | `apps/admin/components/authentication/microsoft-config.tsx` | 5 | God-mode provider card (Configure/Edit + toggle) |
 | `apps/admin/app/assets/logos/microsoft-logo.svg`, `apps/web/app/assets/logos/microsoft-logo.svg` | 5 | Microsoft logo asset |
+| `apps/api/plane/app/views/analytic/worklog_stats.py` | 2 | Worklog stats endpoint (hours/user) + CSV/xlsx export |
+| `apps/web/core/components/analytics/worked-time/*` | 2 | "Worked time" analytics tab (table, totals, filters, export) |
 
 ## Core files edited (merge-risk — keep minimal)
 
@@ -50,6 +52,12 @@ upgrade. We keep new code in **new files** wherever possible and list every
 | `apps/web/core/hooks/oauth/core.tsx` | 5 | +"Sign in with Microsoft" button + `isOAuthEnabled` OR-clause |
 | `packages/types/src/instance/auth.ts` | 5 | +`microsoft` mode key, `IS_MICROSOFT_ENABLED`, `TInstanceMicrosoftAuthenticationConfigurationKeys`, login medium |
 | `packages/types/src/instance/base.ts` | 5 | +`is_microsoft_enabled` on `IInstanceConfig` |
+| `apps/api/plane/app/views/__init__.py` | 2 | +import worklog-stats endpoints |
+| `apps/api/plane/app/urls/analytic.py` | 2 | +worklog-stats + export routes |
+| `apps/web/core/services/analytics.service.ts` | 2 | +`getWorklogStats` + export-URL helper |
+| `apps/web/ce/components/analytics/tabs.tsx` | 2 | +"Worked time" analytics tab entry |
+| `apps/web/core/components/analytics/insight-table/root.tsx` | 2 | constrain generic to `keyof AnalyticsTableDataMap` (tabs union widened) |
+| `packages/types/src/analytics.ts` | 2 | +`worked-time` tab key, date params, `WorklogStats*` types |
 
 ## Objective 5 (Microsoft Entra login) — verification pending
 

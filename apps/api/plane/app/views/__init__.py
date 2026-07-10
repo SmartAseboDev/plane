@@ -219,6 +219,11 @@ from .analytic.project_analytics import (
     ProjectAdvanceAnalyticsChartEndpoint,
 )
 
+from .analytic.worklog_stats import (
+    WorklogStatsEndpoint,
+    WorklogStatsExportEndpoint,
+)
+
 from .notification.base import (
     NotificationViewSet,
     UnreadNotificationEndpoint,

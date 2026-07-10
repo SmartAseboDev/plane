@@ -11,6 +11,7 @@ import type {
   TAnalyticsTabsBase,
   TAnalyticsGraphsBase,
   TAnalyticsFilterParams,
+  WorklogStatsResponse,
 } from "@plane/types";
 // services
 import { APIService } from "./api.service";
@@ -86,6 +87,23 @@ export class AnalyticsService extends APIService {
       .catch((err) => {
         throw err?.response?.data;
       });
+  }
+
+  async getWorklogStats(workspaceSlug: string, params?: TAnalyticsFilterParams): Promise<WorklogStatsResponse> {
+    return this.get(`/api/workspaces/${workspaceSlug}/worklog-stats/`, { params })
+      .then((res) => res?.data)
+      .catch((err) => {
+        throw err?.response?.data;
+      });
+  }
+
+  getWorklogStatsExportUrl(workspaceSlug: string, format: "csv" | "xlsx", params?: TAnalyticsFilterParams): string {
+    const query = new URLSearchParams({ format });
+    if (params?.project_ids) query.set("project_ids", params.project_ids);
+    if (params?.cycle_id) query.set("cycle_id", params.cycle_id);
+    if (params?.start_date) query.set("start_date", params.start_date);
+    if (params?.end_date) query.set("end_date", params.end_date);
+    return `${API_BASE_URL}/api/workspaces/${workspaceSlug}/worklog-stats/export/?${query.toString()}`;
   }
 
   processUrl<_T extends string>(

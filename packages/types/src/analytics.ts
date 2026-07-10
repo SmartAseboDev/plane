@@ -37,7 +37,7 @@ export enum ChartYAxisMetric {
   EPIC_WORK_ITEM_COUNT = "EPIC_WORK_ITEM_COUNT",
 }
 
-export type TAnalyticsTabsBase = "overview" | "work-items";
+export type TAnalyticsTabsBase = "overview" | "work-items" | "worked-time";
 export type TAnalyticsGraphsBase = "projects" | "work-items" | "custom-work-items";
 export interface AnalyticsTab {
   key: TAnalyticsTabsBase;
@@ -49,7 +49,28 @@ export type TAnalyticsFilterParams = {
   project_ids?: string;
   cycle_id?: string;
   module_id?: string;
+  start_date?: string;
+  end_date?: string;
 };
+
+// worked-time (per-person worklog) stats
+export interface WorklogStatsRow {
+  logged_by_id: string;
+  logged_by__display_name: string | null;
+  logged_by__first_name: string | null;
+  logged_by__last_name: string | null;
+  logged_by__email: string | null;
+  total_minutes: number;
+  entry_count: number;
+  duration_display: string;
+}
+
+export interface WorklogStatsResponse {
+  stats: WorklogStatsRow[];
+  total_minutes: number;
+  total_entries: number;
+  total_display: string;
+}
 
 // service types
 
