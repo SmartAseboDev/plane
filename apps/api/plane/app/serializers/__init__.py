@@ -54,6 +54,7 @@ from .cycle import (
     CycleUserPropertiesSerializer,
 )
 from .asset import FileAssetSerializer
+from .worklog import IssueWorklogSerializer
 from .issue import (
     IssueCreateSerializer,
     IssueActivitySerializer,

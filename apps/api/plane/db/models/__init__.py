@@ -89,4 +89,6 @@ from .device import Device, DeviceSession
 
 from .sticky import Sticky
 
+from .worklog import IssueWorklog
+
 from .description import Description, DescriptionVersion
