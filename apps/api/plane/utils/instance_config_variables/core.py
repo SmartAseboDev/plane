@@ -14,7 +14,7 @@ authentication_config_variables = [
     },
     {
         "key": "ENABLE_EMAIL_PASSWORD",
-        "value": os.environ.get("ENABLE_EMAIL_PASSWORD", "0"),
+        "value": os.environ.get("ENABLE_EMAIL_PASSWORD", "1"),
         "category": "AUTHENTICATION",
         "is_encrypted": False,
     },
