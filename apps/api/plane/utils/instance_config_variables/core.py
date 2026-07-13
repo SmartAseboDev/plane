@@ -14,7 +14,7 @@ authentication_config_variables = [
     },
     {
         "key": "ENABLE_EMAIL_PASSWORD",
-        "value": os.environ.get("ENABLE_EMAIL_PASSWORD", "1"),
+        "value": os.environ.get("ENABLE_EMAIL_PASSWORD", "0"),
         "category": "AUTHENTICATION",
         "is_encrypted": False,
     },
@@ -147,7 +147,7 @@ gitea_config_variables = [
 microsoft_config_variables = [
     {
         "key": "IS_MICROSOFT_ENABLED",
-        "value": os.environ.get("IS_MICROSOFT_ENABLED", "0"),
+        "value": os.environ.get("IS_MICROSOFT_ENABLED", "1"),
         "category": "MICROSOFT",
         "is_encrypted": False,
     },

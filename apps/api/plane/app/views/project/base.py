@@ -36,6 +36,8 @@ from plane.db.models import (
     ProjectUserProperty,
     State,
     DEFAULT_STATES,
+    Estimate,
+    EstimatePoint,
     Workspace,
     WorkspaceMember,
 )
@@ -293,6 +295,32 @@ class ProjectViewSet(BaseViewSet):
                     for state in DEFAULT_STATES
                 ]
             )
+
+            # Provision a default Fibonacci points estimate so story-point
+            # estimation works out of the box (mirrors Jira story points).
+            fibonacci_estimate = Estimate.objects.create(
+                name="Fibonacci",
+                type="points",
+                project=serializer.instance,
+                workspace=serializer.instance.workspace,
+                last_used=True,
+                created_by=request.user,
+            )
+            EstimatePoint.objects.bulk_create(
+                [
+                    EstimatePoint(
+                        estimate=fibonacci_estimate,
+                        project=serializer.instance,
+                        workspace=serializer.instance.workspace,
+                        key=index,
+                        value=str(point),
+                        created_by=request.user,
+                    )
+                    for index, point in enumerate([1, 2, 3, 5, 8, 13, 21])
+                ]
+            )
+            serializer.instance.estimate = fibonacci_estimate
+            serializer.instance.save()
 
             project = self.get_queryset().filter(pk=serializer.data["id"]).first()
 

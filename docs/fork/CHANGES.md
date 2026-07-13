@@ -60,6 +60,11 @@ upgrade. We keep new code in **new files** wherever possible and list every
 | `apps/web/core/components/analytics/insight-table/root.tsx` | 2 | constrain generic to `keyof AnalyticsTableDataMap` (tabs union widened) |
 | `packages/types/src/analytics.ts` | 2 | +`worked-time` tab key, date params, `WorklogStats*` types |
 | `apps/api/plane/db/models/project.py` | — | Defaults `cycle_view` + `issue_views_view` to `True` (new projects get Cycles/Views/Pages on) |
+| `packages/utils/src/work-item/base.ts` | defaults | Default work-item layout → **Board (kanban)**, default group-by → **state** |
+| `apps/api/plane/utils/instance_config_variables/core.py` | defaults | `ENABLE_EMAIL_PASSWORD` seed → `0`, `IS_MICROSOFT_ENABLED` seed → `1` (fresh installs) |
+| `apps/api/plane/license/models/instance.py` | defaults | `is_telemetry_enabled` default → `False` (+ license migration 0007) |
+| `apps/api/plane/app/views/project/base.py` | defaults | Provision a **Fibonacci** points estimate on project create + set as project estimate |
+| `apps/api/plane/license/migrations/0007_instance_disable_telemetry_by_default.py` | — | Migration: telemetry off by default |
 
 ## Objective 5 (Microsoft Entra login) — verification pending
 
