@@ -26,7 +26,8 @@ upgrade. We keep new code in **new files** wherever possible and list every
 | `apps/admin/components/authentication/microsoft-config.tsx` | 5 | God-mode provider card (Configure/Edit + toggle) |
 | `apps/admin/app/assets/logos/microsoft-logo.svg`, `apps/web/app/assets/logos/microsoft-logo.svg` | 5 | Microsoft logo asset |
 | `apps/api/plane/app/views/analytic/worklog_stats.py` | 2 | Worklog stats endpoint (hours/user) + CSV/xlsx export |
-| `apps/web/core/components/analytics/worked-time/*` | 2 | "Worked time" analytics tab (table, totals, filters, export) |
+| `apps/web/core/components/analytics/worked-time/*` | 2 | "Worked time" analytics tab (table, totals, filters, export, bar + donut charts) |
+| `apps/api/plane/db/migrations/0123_project_enable_cycle_view_and_views_by_default.py` | — | Migration: cycle/views default-on for new projects |
 
 ## Core files edited (merge-risk — keep minimal)
 
@@ -58,6 +59,7 @@ upgrade. We keep new code in **new files** wherever possible and list every
 | `apps/web/ce/components/analytics/tabs.tsx` | 2 | +"Worked time" analytics tab entry |
 | `apps/web/core/components/analytics/insight-table/root.tsx` | 2 | constrain generic to `keyof AnalyticsTableDataMap` (tabs union widened) |
 | `packages/types/src/analytics.ts` | 2 | +`worked-time` tab key, date params, `WorklogStats*` types |
+| `apps/api/plane/db/models/project.py` | — | Defaults `cycle_view` + `issue_views_view` to `True` (new projects get Cycles/Views/Pages on) |
 
 ## Objective 5 (Microsoft Entra login) — verification pending
 
