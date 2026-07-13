@@ -11,19 +11,16 @@ import useSWR from "swr";
 import { Download } from "lucide-react";
 // plane imports
 import { Button } from "@plane/propel/button";
-import type { TAnalyticsFilterParams, WorklogStatsRow } from "@plane/types";
+import type { TAnalyticsFilterParams } from "@plane/types";
 // hooks
 import { useAnalytics } from "@/hooks/store/use-analytics";
 // services
 import { AnalyticsService } from "@/services/analytics.service";
+// local
+import { WorkedTimeCharts } from "./worked-time-charts";
+import { rowLabel } from "./utils";
 
 const analyticsService = new AnalyticsService();
-
-const rowLabel = (row: WorklogStatsRow) =>
-  row.logged_by__display_name ||
-  `${row.logged_by__first_name ?? ""} ${row.logged_by__last_name ?? ""}`.trim() ||
-  row.logged_by__email ||
-  "Unknown user";
 
 export const WorkedTimeTable = observer(function WorkedTimeTable() {
   // router
@@ -112,6 +109,8 @@ export const WorkedTimeTable = observer(function WorkedTimeTable() {
           </Button>
         </div>
       </div>
+
+      {!isLoading && rows.length > 0 && <WorkedTimeCharts stats={rows} />}
 
       <div className="overflow-x-auto rounded-lg border border-subtle">
         <table className="text-sm w-full">
